@@ -80,6 +80,7 @@ const config: Config = {
       strategy: 'class',
     }),
     require('tailwindcss-animate'),
+    require('@tailwindcss/typography'),
   ],
 };
 export default config;

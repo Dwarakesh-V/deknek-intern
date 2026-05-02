@@ -15,7 +15,6 @@ export const useAuth = (errorCb?: ErrorCb) => {
   const router = useRouter();
 
   const socialActions = (action: string) => {
-    if (action === 'facebook') setLoadingFacebook(true);
     if (action === 'google') setLoadingGoogle(true);
 
     signIn(action, { redirect: false }).then((cb) => {
@@ -127,7 +126,6 @@ export const useAuth = (errorCb?: ErrorCb) => {
   return {
     loading,
     loadingGoogle,
-    loadingFacebook,
     socialActions,
     register,
     signin,

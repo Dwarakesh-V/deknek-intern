@@ -1,13 +1,15 @@
 import BottomText from './auth/components/BottomText';
-import Logo from './auth/components/Logo';
 
-export default function AuthLayout({ children }: { children: React.ReactNode }) {
+export default function AuthLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className="w-full overflow-hidden">
-      <div className="m-auto flex h-screen items-center justify-center 2xl:container">
-        <div className="relative w-full max-w-md">
-          <div className="m-auto rounded-lg border bg-white px-6 py-12 shadow-lg sm:p-20">
-            <Logo />
+    <div className="w-full min-h-screen overflow-hidden">
+      <div className="m-auto min-h-screen 2xl:container">
+        <div className="relative flex min-h-screen w-full">
+          <div className="m-auto w-full max-w-xl px-6 py-12 sm:p-20">
             {children}
             <BottomText />
           </div>
