@@ -13,7 +13,7 @@ export default function Home() {
       <nav className="border-gray-200 bg-white dark:bg-gray-900">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
           <div className="ml-4 flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="images/logo.svg" className="w-10" alt="logo" />
+            <span className="font-bold text-xl">Auth App</span>
           </div>
           <div className="flex items-center space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
             <Button onClick={() => signOut()}>Logout</Button>
@@ -45,7 +45,7 @@ export default function Home() {
       </nav>
       <div className="mt-5 flex w-full justify-center">
         <h2 className="bg-gradient-to-r from-orange-400 to-blue-700 bg-clip-text text-3xl font-extrabold text-transparent">
-          You are on Protected page
+          Hi {typeof logedIn !== 'boolean' && logedIn?.user ? (logedIn.user.name || logedIn.user.email || 'User') : 'User'}
         </h2>
       </div>
     </div>

@@ -22,7 +22,7 @@ const AdminPage = () => {
       <nav className="border-gray-200 bg-white dark:bg-gray-900">
         <div className="mx-auto flex max-w-screen-xl flex-wrap items-center justify-between p-4">
           <div className="ml-4 flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="images/logo.svg" className="w-10" alt="logo" />
+            <span className="font-bold text-xl">Auth App</span>
           </div>
           <div className="flex items-center space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
             <Button onClick={() => signOut()}>Logout</Button>

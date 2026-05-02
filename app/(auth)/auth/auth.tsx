@@ -2,7 +2,6 @@
 import { useCallback, useState, useEffect } from 'react';
 import { useForm, FieldValues, SubmitHandler, set } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { motion, useAnimation, useAnimationControls } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 
 import SocialLogin from './components/SocialLogin';
@@ -12,7 +11,6 @@ import { Button } from '@/components/ui/button';
 import { emailValidation, nameValidation, passwordValidation } from './validation/validation';
 import Loading from '@/components/ui/Loading';
 import { useAuth } from './hooks/useAuth';
-import FadeIn from '@/components/animation/FadeIn';
 
 enum VARIANTS {
   login = 'LOGIN',
@@ -32,7 +30,6 @@ const Auth = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showMessage, setShowMessage] = useState<IShowMessage | null>(null);
   const [bottomMessage, setBottomMessage] = useState<IShowMessage | null>(null);
-  const controls = useAnimationControls();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
 
@@ -59,15 +56,6 @@ const Auth = () => {
     activateUser,
   } = useAuth(setError);
 
-  const slideOut = async () => {
-    await controls.start({ x: 500, opacity: 0, transition: { duration: 0.5 } });
-    slideIn();
-  };
-
-  const slideIn = async () => {
-    await controls.start({ x: 0, opacity: 1, transition: { duration: 0.5 } });
-  };
-
   const isLogin = variant === VARIANTS.login;
   const isRegister = variant === VARIANTS.register;
   const isReset = variant === VARIANTS.reset;
@@ -75,7 +63,6 @@ const Auth = () => {
   const changeVariant = (variant: Variant) => {
     clearErrors();
     setShowMessage(null);
-    slideOut();
     setVariant(variant);
   };
 
@@ -120,16 +107,12 @@ const Auth = () => {
 
   return (
     <div>
-      <motion.div initial={{ opacity: 1, x: 0 }} animate={controls}>
-        <FadeIn delay={0.2} direction="left">
-          <SocialLogin />
-        </FadeIn>
-        <FadeIn delay={0.4} direction="left">
-          <Divider />
-        </FadeIn>
+      <div>
+        <SocialLogin />
+        <Divider />
 
         <form action="" onSubmit={handleSubmit(onSubmit)} className="py-6">
-          <FadeIn delay={0.8} direction="left">
+          <div>
             {isRegister && (
               <Input
                 label="Name"
@@ -202,9 +185,9 @@ const Auth = () => {
                 </span>
               </div>
             )}
-          </FadeIn>
+          </div>
 
-          <FadeIn delay={0.8} direction="left">
+          <div className="mt-6">
             <Button
               type="submit"
               variant="ai"
@@ -224,10 +207,10 @@ const Auth = () => {
                 {isLogin ? 'Create new account' : 'Login to your account'}
               </span>
             </div>
-          </FadeIn>
+          </div>
           {bottomMessage && (
             <div
-              className={`text-sm leading-3 ${
+              className={`mt-4 text-sm leading-3 ${
                 bottomMessage?.type === 'error' ? 'text-rose-500' : 'text-lime-600'
               }`}
             >
@@ -235,7 +218,7 @@ const Auth = () => {
             </div>
           )}
         </form>
-      </motion.div>
+      </div>
     </div>
   );
 };
