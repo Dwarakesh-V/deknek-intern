@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 
 import prisma from '@/app/libs/prismaDb';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
   const body = await request.json();
   const { token, password } = body;
@@ -19,7 +21,7 @@ export async function POST(request: Request) {
     });
 
     if (!user || !user?.resetTokenExpiry) {
-      return NextResponse.json('Token invalid or expired', { status: 404 });
+      return NextResponse.json('Login with your new credentials', { status: 404 });
     }
 
     // Check if token is expired
