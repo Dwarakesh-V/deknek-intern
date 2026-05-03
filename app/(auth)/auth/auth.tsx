@@ -4,8 +4,6 @@ import { useForm, FieldValues, SubmitHandler, set } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { motion, useAnimation, useAnimationControls } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
-
-import SocialLogin from './components/SocialLogin';
 import Divider from './components/Divider';
 import Input from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -125,12 +123,6 @@ const Auth = () => {
           <h1 className="mb-6 text-2xl font-semibold text-gray-900">
             Write boldly. Save instantly. Access anywhere.
           </h1>
-        </FadeIn>
-        <FadeIn delay={0.2} direction="left">
-          <SocialLogin />
-        </FadeIn>
-        <FadeIn delay={0.4} direction="left">
-          <Divider />
         </FadeIn>
 
         <form action="" onSubmit={handleSubmit(onSubmit)} className="py-6">
