@@ -40,10 +40,7 @@ export const authOptions: AuthOptions = {
           throw new Error('not_confirmed');
         }
 
-        const isPasswordCorrect = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        );
+        const isPasswordCorrect = await bcrypt.compare(credentials.password, user.hashedPassword);
 
         if (!isPasswordCorrect) {
           throw new Error('password');
