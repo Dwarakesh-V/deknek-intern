@@ -151,8 +151,9 @@ const Auth = () => {
 
             {showMessage && (
               <div
-                className={`mb-6 mt-1 text-xs leading-3 ${showMessage.type === 'error' ? 'text-rose-500' : 'text-lime-600'
-                  }`}
+                className={`mb-6 mt-1 text-xs leading-3 ${
+                  showMessage.type === 'error' ? 'text-rose-500' : 'text-lime-600'
+                }`}
               >
                 {showMessage?.message}
               </div>
@@ -223,8 +224,9 @@ const Auth = () => {
           </FadeIn>
           {bottomMessage && (
             <div
-              className={`text-sm leading-3 ${bottomMessage?.type === 'error' ? 'text-rose-500' : 'text-lime-600'
-                }`}
+              className={`text-sm leading-3 ${
+                bottomMessage?.type === 'error' ? 'text-rose-500' : 'text-lime-600'
+              }`}
             >
               {bottomMessage.message}
             </div>

@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <section className="relative overflow-hidden">
       <div
-        className="-z-10 pointer-events-none absolute left-1/2 -translate-x-1/2 transform"
+        className="pointer-events-none absolute left-1/2 -z-10 -translate-x-1/2 transform"
         aria-hidden="true"
       >
         <svg width="1360" height="578" viewBox="0 0 1360 578" xmlns="http://www.w3.org/2000/svg">
@@ -42,9 +42,8 @@ export default function Home() {
             </h1>
 
             <p className="mx-auto mb-10 max-w-3xl text-lg text-gray-600 md:text-xl">
-              A clean and secure notes platform built for students, developers, and creators.
-              Create notes, edit instantly, store safely, and download your files as markdown
-              anytime.
+              A clean and secure notes platform built for students, developers, and creators. Create
+              notes, edit instantly, store safely, and download your files as markdown anytime.
             </p>
 
             <div className="mx-auto flex max-w-md flex-col justify-center gap-4 sm:flex-row">

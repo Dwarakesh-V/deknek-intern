@@ -21,7 +21,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState('');
   const [title, setTitle] = useState('Untitled Note');
   const [content, setContent] = useState(
-    '# Welcome to NoteForge\n\n## Start Writing\n\n- Notes\n- Ideas\n- Markdown\n\n```js\nconsole.log("hello world")\n```'
+    '# Welcome to NoteForge\n\n## Start Writing\n\n- Notes\n- Ideas\n- Markdown\n\n```js\nconsole.log("hello world")\n```',
   );
   const [saved, setSaved] = useState(false);
   const [currentDate, setCurrentDate] = useState('');
@@ -194,9 +194,7 @@ export default function Home() {
                 key={note.id}
                 onClick={() => loadNote(note)}
                 className={`cursor-pointer rounded-xl border p-3 transition ${
-                  selectedId === note.id
-                    ? 'border-blue-500 bg-blue-50'
-                    : 'hover:bg-gray-50'
+                  selectedId === note.id ? 'border-blue-500 bg-blue-50' : 'hover:bg-gray-50'
                 }`}
               >
                 <div className="flex justify-between gap-3">
@@ -204,9 +202,7 @@ export default function Home() {
                     <p className="truncate font-medium">{note.title}</p>
                     <p className="text-xs text-gray-500">
                       {/* Safe Date Check! */}
-                      {note.updatedAt
-                        ? new Date(note.updatedAt).toLocaleString()
-                        : 'Just now'}
+                      {note.updatedAt ? new Date(note.updatedAt).toLocaleString() : 'Just now'}
                     </p>
                   </div>
 
@@ -240,9 +236,7 @@ export default function Home() {
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full rounded-xl border px-4 py-3 text-xl font-semibold outline-none focus:border-blue-500"
               />
-              <p className="mt-2 text-xs text-gray-500">
-                Last opened: {currentDate}
-              </p>
+              <p className="mt-2 text-xs text-gray-500">Last opened: {currentDate}</p>
             </div>
 
             <div className="flex gap-3">
@@ -250,9 +244,7 @@ export default function Home() {
                 Download .md
               </Button>
 
-              <Button onClick={saveNote}>
-                {saved ? 'Saved' : 'Save'}
-              </Button>
+              <Button onClick={saveNote}>{saved ? 'Saved' : 'Save'}</Button>
             </div>
           </div>
 
@@ -260,9 +252,7 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-2">
             {/* Editor */}
             <div>
-              <h3 className="mb-3 text-sm font-semibold text-gray-500">
-                Editor
-              </h3>
+              <h3 className="mb-3 text-sm font-semibold text-gray-500">Editor</h3>
 
               <textarea
                 value={content}
@@ -274,11 +264,9 @@ export default function Home() {
 
             {/* Preview (Using the Tailwind typography plugin 'prose' class) */}
             <div>
-              <h3 className="mb-3 text-sm font-semibold text-gray-500">
-                Live Preview
-              </h3>
+              <h3 className="mb-3 text-sm font-semibold text-gray-500">Live Preview</h3>
 
-              <div className="prose max-w-none min-h-[520px] rounded-2xl border bg-gray-50 p-6 overflow-auto">
+              <div className="prose min-h-[520px] max-w-none overflow-auto rounded-2xl border bg-gray-50 p-6">
                 <ReactMarkdown>{content}</ReactMarkdown>
               </div>
             </div>

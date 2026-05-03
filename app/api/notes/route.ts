@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
-import prisma from '@/app/libs/prismaDb'; 
-import { authOptions } from '@/app/api/auth/[...nextauth]/route'; 
+import prisma from '@/app/libs/prismaDb';
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
 // ----------------------------------------------------------------------
 // GET: Fetch all notes for the logged-in user
@@ -61,7 +61,7 @@ export async function POST(request: Request) {
     // If an ID exists, UPDATE the existing note
     if (id && id.length > 0) {
       const existingNote = await prisma.note.findUnique({ where: { id } });
-      
+
       // Ensure the user actually owns the note they are trying to edit
       if (!existingNote || existingNote.userId !== user.id) {
         return NextResponse.json({ error: 'Unauthorized to edit this note' }, { status: 403 });
@@ -79,7 +79,7 @@ export async function POST(request: Request) {
       data: {
         title,
         content,
-        userId: user.id, 
+        userId: user.id,
       },
     });
 
