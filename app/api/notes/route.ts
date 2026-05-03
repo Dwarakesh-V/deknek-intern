@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import prisma from '@/app/libs/prismaDb';
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+import { authOptions } from '@/app/utils/authOptions';
 
 // ----------------------------------------------------------------------
 // GET: Fetch all notes for the logged-in user
