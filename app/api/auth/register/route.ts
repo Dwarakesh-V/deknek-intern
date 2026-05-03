@@ -5,8 +5,6 @@ import { NextResponse } from 'next/server';
 import prisma from '@/app/libs/prismaDb';
 import sendEmail from '@/app/utils/sendEmail';
 
-export const dynamic = 'force-dynamic';
-
 export async function POST(request: Request) {
   try {
     const body = await request.json();
@@ -41,7 +39,7 @@ export async function POST(request: Request) {
     });
 
     // Send email
-    const link = `${process.env.APP_URL}/auth?token=${token}`;
+    const link = `${process.env.NEXTAUTH_URL}/auth?token=${token}`;
     sendEmail(email, 'Email confirmation', link);
 
     return NextResponse.json(`Confirmation link is sent to ${email}. Please check your email!`, {

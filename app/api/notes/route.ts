@@ -3,8 +3,6 @@ import { getServerSession } from 'next-auth/next';
 import prisma from '@/app/libs/prismaDb';
 import { authOptions } from '@/app/utils/authOptions';
 
-export const dynamic = 'force-dynamic';
-
 // ----------------------------------------------------------------------
 // GET: Fetch all notes for the logged-in user
 // ----------------------------------------------------------------------
