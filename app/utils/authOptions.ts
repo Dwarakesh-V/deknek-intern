@@ -1,11 +1,11 @@
-import type { NextAuthOptions } from 'next-auth';
+import bcrypt from 'bcrypt';
+import { AuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
-import bcrypt from 'bcryptjs';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
 import prisma from '@/app/libs/prismaDb';
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
 
   providers: [
@@ -19,21 +19,34 @@ export const authOptions: NextAuthOptions = {
 
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials');
+          throw new Error('Invalid Credentials');
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: {
+            email: credentials.email,
+          },
         });
 
-        if (!user || !user.hashedPassword) {
-          throw new Error('Invalid credentials');
+        if (!user) {
+          throw new Error('email');
         }
 
-        const valid = await bcrypt.compare(credentials.password, user.hashedPassword);
+        if (!user.hashedPassword) {
+          throw new Error('password');
+        }
 
-        if (!valid) {
-          throw new Error('Invalid credentials');
+        if (!user.emailVerified) {
+          throw new Error('not_confirmed');
+        }
+
+        const isPasswordCorrect = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
+        );
+
+        if (!isPasswordCorrect) {
+          throw new Error('password');
         }
 
         return user;
@@ -41,19 +54,29 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
-  session: {
-    strategy: 'jwt',
-  },
-
   callbacks: {
     async session({ session, token }) {
-      if (session.user && token.sub) {
-        session.user.id = token.sub;
+      if (token.sub && session.user) {
+        const user = await prisma.user.findUnique({
+          where: { id: token.sub },
+        });
+
+        if (user) {
+          session.user.id = user.id;
+          session.user.role = user.role;
+          session.user.image = user.image;
+        }
       }
 
       return session;
     },
   },
 
-  secret: process.env.NEXTAUTH_SECRET,
+  session: {
+    strategy: 'jwt',
+    maxAge: 24 * 60 * 60,
+  },
+
+  secret: process.env.SECRET,
+  debug: process.env.NODE_ENV === 'development',
 };
